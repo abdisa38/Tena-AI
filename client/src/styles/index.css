@@ -5,7 +5,7 @@
 /* Global Styles */
 @layer base {
   * {
-    @apply border-border;
+    @apply border-cloud-gray;
   }
   
   body {
