@@ -1,0 +1,223 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Global Styles */
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    @apply bg-tena-white text-tena-black;
+    font-family: 'Noto Sans', 'Inter', system-ui, sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-semibold;
+  }
+
+  h1 {
+    @apply text-4xl md:text-5xl;
+  }
+
+  h2 {
+    @apply text-3xl md:text-4xl;
+  }
+
+  h3 {
+    @apply text-2xl md:text-3xl;
+  }
+
+  h4 {
+    @apply text-xl md:text-2xl;
+  }
+
+  p {
+    @apply text-base leading-relaxed;
+  }
+
+  a {
+    @apply transition-colors duration-200;
+  }
+
+  button {
+    @apply transition-all duration-200;
+  }
+
+  input, textarea, select {
+    @apply transition-all duration-200;
+  }
+
+  /* Scrollbar Styles */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-cloud-gray;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-tena-black rounded-lg;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-opacity-80;
+  }
+}
+
+/* Custom Utility Classes */
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.3s ease-in;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.4s ease-out;
+  }
+
+  /* Focus visible styles */
+  .focus-ring {
+    @apply focus:outline-none focus:ring-2 focus:ring-tena-yellow focus:ring-offset-2;
+  }
+
+  /* Card styles */
+  .card {
+    @apply bg-tena-white rounded-xl shadow-soft p-6;
+  }
+
+  .card-hover {
+    @apply hover:shadow-medium transition-shadow duration-300;
+  }
+
+  /* Container */
+  .container-custom {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  /* Text gradient */
+  .text-gradient {
+    @apply bg-gradient-to-r from-tena-yellow to-amber-400 bg-clip-text text-transparent;
+  }
+
+  /* Glass effect */
+  .glass {
+    @apply bg-white bg-opacity-70 backdrop-blur-md;
+  }
+}
+
+/* Component Styles */
+@layer components {
+  /* Button Base */
+  .btn {
+    @apply px-6 py-3 rounded-lg font-medium focus-ring disabled:opacity-50 disabled:cursor-not-allowed inline-flex items-center justify-center gap-2;
+  }
+
+  .btn-primary {
+    @apply btn bg-tena-black text-tena-white hover:bg-opacity-90;
+  }
+
+  .btn-secondary {
+    @apply btn bg-tena-yellow text-tena-black hover:bg-opacity-90;
+  }
+
+  .btn-outline {
+    @apply btn border-2 border-tena-black text-tena-black hover:bg-tena-black hover:text-tena-white;
+  }
+
+  .btn-ghost {
+    @apply btn text-tena-black hover:bg-cloud-gray;
+  }
+
+  .btn-sm {
+    @apply px-4 py-2 text-sm;
+  }
+
+  .btn-lg {
+    @apply px-8 py-4 text-lg;
+  }
+
+  /* Input */
+  .input {
+    @apply w-full px-4 py-3 border-2 border-cloud-gray rounded-lg focus:border-tena-yellow focus:outline-none bg-tena-white;
+  }
+
+  .input-error {
+    @apply border-error focus:border-error;
+  }
+
+  /* Badge */
+  .badge {
+    @apply inline-flex items-center px-3 py-1 rounded-full text-sm font-medium;
+  }
+
+  .badge-success {
+    @apply badge bg-success bg-opacity-10 text-success;
+  }
+
+  .badge-error {
+    @apply badge bg-error bg-opacity-10 text-error;
+  }
+
+  .badge-warning {
+    @apply badge bg-warning bg-opacity-10 text-warning;
+  }
+
+  .badge-info {
+    @apply badge bg-info bg-opacity-10 text-info;
+  }
+
+  /* Loading Spinner */
+  .spinner {
+    @apply animate-spin rounded-full border-4 border-cloud-gray border-t-tena-yellow;
+  }
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Print Styles */
+@media print {
+  body {
+    @apply bg-white;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+}
