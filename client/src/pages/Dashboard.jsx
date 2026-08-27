@@ -6,7 +6,7 @@ import Button from '@components/ui/Button';
 import Badge from '@components/ui/Badge';
 import Loading from '@components/ui/Loading';
 import useAssessmentStore from '@stores/useAssessmentStore';
-import { format } from 'date-fns';
+// import { format } from 'date-fns'; // Will use in Phase 5
 
 const Dashboard = () => {
   const { stats, loading, fetchStats } = useAssessmentStore();
