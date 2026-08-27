@@ -1,4 +1,4 @@
-import { Globe, Check } from 'lucide-react';
+import { Globe, Check, Languages } from 'lucide-react';
 import Card from '@components/ui/Card';
 import { clsx } from 'clsx';
 
@@ -8,21 +8,18 @@ const LanguageSelector = ({ selected, onSelect }) => {
       code: 'english',
       name: 'English',
       nativeName: 'English',
-      flag: '🇺🇸',
       description: 'Record your symptoms in English'
     },
     {
       code: 'amharic',
       name: 'Amharic',
       nativeName: 'አማርኛ',
-      flag: '🇪🇹',
       description: 'Record your symptoms in Amharic'
     },
     {
       code: 'afaan_oromoo',
       name: 'Afaan Oromoo',
       nativeName: 'Afaan Oromoo',
-      flag: '🇪🇹',
       description: 'Record your symptoms in Afaan Oromoo'
     }
   ];
@@ -58,7 +55,9 @@ const LanguageSelector = ({ selected, onSelect }) => {
                 </div>
               )}
               
-              <div className="text-3xl mb-2">{language.flag}</div>
+              <div className="mb-3">
+                <Languages className="w-12 h-12 text-tena-yellow" />
+              </div>
               <h3 className="font-semibold text-tena-black mb-1">
                 {language.name}
               </h3>
