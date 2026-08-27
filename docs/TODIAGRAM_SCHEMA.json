@@ -1,0 +1,95 @@
+{
+  "name": "Tena AI Architecture & Entity Schema",
+  "version": "1.0.0",
+  "description": "Production Entity-Relationship & Component Topology for ToDiagram visualizer",
+  "entities": [
+    {
+      "name": "User",
+      "fields": [
+        { "name": "_id", "type": "ObjectId", "isPrimary": true },
+        { "name": "fullName", "type": "String", "required": true },
+        { "name": "email", "type": "String", "unique": true, "required": true },
+        { "name": "password", "type": "String", "required": true },
+        { "name": "role", "type": "Enum('patient', 'doctor', 'admin')", "default": "patient" },
+        { "name": "phoneNumber", "type": "String" },
+        { "name": "bloodGroup", "type": "String" },
+        { "name": "emergencyContact", "type": "Object" },
+        { "name": "createdAt", "type": "Date" }
+      ]
+    },
+    {
+      "name": "Doctor",
+      "fields": [
+        { "name": "_id", "type": "ObjectId", "isPrimary": true },
+        { "name": "userId", "type": "ObjectId", "ref": "User", "required": true },
+        { "name": "specialty", "type": "String", "required": true },
+        { "name": "qualification", "type": "String", "required": true },
+        { "name": "licenseNumber", "type": "String", "required": true },
+        { "name": "experienceYears", "type": "Number" },
+        { "name": "consultationFee", "type": "Number", "required": true },
+        { "name": "currency", "type": "String", "default": "ETB" },
+        { "name": "isVerified", "type": "Boolean", "default": false },
+        { "name": "clinicAffiliation", "type": "String" },
+        { "name": "rating", "type": "Number", "default": 5.0 },
+        { "name": "availableDays", "type": "Array" }
+      ]
+    },
+    {
+      "name": "TriageRecord",
+      "fields": [
+        { "name": "_id", "type": "ObjectId", "isPrimary": true },
+        { "name": "userId", "type": "ObjectId", "ref": "User" },
+        { "name": "symptoms", "type": "Array", "required": true },
+        { "name": "duration", "type": "String" },
+        { "name": "severityLevel", "type": "Enum('Low', 'Moderate', 'Urgent', 'Emergency')" },
+        { "name": "aiAssessment", "type": "String" },
+        { "name": "recommendedActions", "type": "Array" },
+        { "name": "suggestedSpecialties", "type": "Array" },
+        { "name": "disclaimerAcknowledged", "type": "Boolean", "default": true },
+        { "name": "createdAt", "type": "Date" }
+      ]
+    },
+    {
+      "name": "Appointment",
+      "fields": [
+        { "name": "_id", "type": "ObjectId", "isPrimary": true },
+        { "name": "patientId", "type": "ObjectId", "ref": "User", "required": true },
+        { "name": "doctorId", "type": "ObjectId", "ref": "Doctor", "required": true },
+        { "name": "date", "type": "Date", "required": true },
+        { "name": "timeSlot", "type": "String", "required": true },
+        { "name": "status", "type": "Enum('pending', 'confirmed', 'completed', 'cancelled')", "default": "pending" },
+        { "name": "triageSummary", "type": "String" },
+        { "name": "paymentStatus", "type": "Enum('unpaid', 'paid', 'refunded')", "default": "unpaid" },
+        { "name": "paymentMethod", "type": "String" },
+        { "name": "stripePaymentIntentId", "type": "String" },
+        { "name": "consultationNotes", "type": "String" }
+      ]
+    },
+    {
+      "name": "Prescription",
+      "fields": [
+        { "name": "_id", "type": "ObjectId", "isPrimary": true },
+        { "name": "appointmentId", "type": "ObjectId", "ref": "Appointment" },
+        { "name": "patientId", "type": "ObjectId", "ref": "User", "required": true },
+        { "name": "doctorId", "type": "ObjectId", "ref": "Doctor", "required": true },
+        { "name": "medications", "type": "Array", "required": true },
+        { "name": "instructions", "type": "String" },
+        { "name": "diagnosis", "type": "String" },
+        { "name": "issuedAt", "type": "Date", "default": "Date.now" }
+      ]
+    },
+    {
+      "name": "HealthFacility",
+      "fields": [
+        { "name": "_id", "type": "ObjectId", "isPrimary": true },
+        { "name": "name", "type": "String", "required": true },
+        { "name": "type", "type": "Enum('Hospital', 'Clinic', 'Pharmacy', 'Emergency Center')", "required": true },
+        { "name": "city", "type": "String", "required": true },
+        { "name": "region", "type": "String" },
+        { "name": "phoneNumber", "type": "String" },
+        { "name": "is24Hours", "type": "Boolean", "default": false },
+        { "name": "emergencyAmbulanceAvailable", "type": "Boolean", "default": false }
+      ]
+    }
+  ]
+}

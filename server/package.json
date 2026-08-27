@@ -1,0 +1,32 @@
+{
+  "name": "tena-ai-server",
+  "version": "1.0.0",
+  "description": "Production-grade backend for Tena AI - Health Intelligence & Telehealth Platform",
+  "main": "src/index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js"
+  },
+  "keywords": ["healthcare", "ai", "telehealth", "gemini-pro", "ethiopia", "mern"],
+  "author": "Tena AI Engineering",
+  "license": "MIT",
+  "dependencies": {
+    "@google/genai": "^0.1.2",
+    "@google/generative-ai": "^0.24.0",
+    "bcryptjs": "^3.0.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "express-rate-limit": "^7.5.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.12.1",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.5-lts.1",
+    "nodemailer": "^6.10.0",
+    "stripe": "^17.7.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.9"
+  }
+}
