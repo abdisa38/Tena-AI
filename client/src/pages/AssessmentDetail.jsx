@@ -17,6 +17,7 @@ import Button from '@components/ui/Button';
 import Badge from '@components/ui/Badge';
 import Loading from '@components/ui/Loading';
 import Modal from '@components/ui/Modal';
+import AIAnalysisDisplay from '@components/AIAnalysisDisplay';
 import useAssessmentStore from '@stores/useAssessmentStore';
 
 const AssessmentDetail = () => {
@@ -103,100 +104,11 @@ const AssessmentDetail = () => {
         </div>
       </div>
 
-      {/* AI Analysis - Confidence Score */}
-      <Card className="mb-6 bg-gradient-to-r from-tena-yellow to-yellow-300">
-        <div className="flex items-center justify-between">
-          <div>
-            <p className="text-sm text-tena-black mb-1">AI Confidence Score</p>
-            <div className="flex items-center gap-4">
-              <h2 className="text-5xl font-bold text-tena-black">
-                {assessment.aiAnalysis?.confidence || 0}%
-              </h2>
-              <div>
-                <Badge 
-                  variant={
-                    assessment.aiAnalysis?.urgencyLevel === 'emergency' ? 'error' :
-                    assessment.aiAnalysis?.urgencyLevel === 'urgent' ? 'warning' : 'success'
-                  }
-                  className="capitalize"
-                >
-                  {assessment.aiAnalysis?.urgencyLevel || 'routine'}
-                </Badge>
-              </div>
-            </div>
-          </div>
-          <Brain className="w-16 h-16 text-tena-black opacity-20" />
-        </div>
-      </Card>
-
-      {/* Symptoms */}
-      <Card className="mb-6">
-        <Card.Header>
-          <div className="flex items-center gap-2">
-            <Activity className="w-5 h-5" />
-            <Card.Title>Recorded Symptoms</Card.Title>
-          </div>
-        </Card.Header>
-        <Card.Content>
-          {assessment.symptoms && assessment.symptoms.length > 0 ? (
-            <div className="space-y-4">
-              {assessment.symptoms.map((symptom, index) => (
-                <div key={index} className="p-4 bg-cloud-gray rounded-lg">
-                  <div className="flex items-start justify-between mb-2">
-                    <h4 className="font-semibold text-tena-black capitalize">
-                      {symptom.symptom}
-                    </h4>
-                    <Badge 
-                      variant={
-                        symptom.severity === 'severe' ? 'error' :
-                        symptom.severity === 'moderate' ? 'warning' : 'info'
-                      }
-                      className="capitalize"
-                    >
-                      {symptom.severity}
-                    </Badge>
-                  </div>
-                  {symptom.duration && (
-                    <p className="text-sm text-gray-600 mb-1">
-                      Duration: {symptom.duration}
-                    </p>
-                  )}
-                  {symptom.notes && (
-                    <p className="text-sm text-gray-700 mt-2">{symptom.notes}</p>
-                  )}
-                </div>
-              ))}
-            </div>
-          ) : (
-            <p className="text-gray-500 text-center py-4">No symptoms recorded</p>
-          )}
-        </Card.Content>
-      </Card>
-
-      {/* Clinical Summary */}
-      <Card className="mb-6">
-        <Card.Header>
-          <div className="flex items-center gap-2">
-            <FileText className="w-5 h-5" />
-            <Card.Title>Clinical Summary</Card.Title>
-          </div>
-        </Card.Header>
-        <Card.Content>
-          <p className="text-gray-700 leading-relaxed whitespace-pre-line">
-            {assessment.aiAnalysis?.clinicalSummary || 'No summary available'}
-          </p>
-        </Card.Content>
-      </Card>
-
-      {/* Possible Conditions */}
-      {assessment.aiAnalysis?.possibleConditions && assessment.aiAnalysis.possibleConditions.length > 0 && (
-        <Card className="mb-6">
-          <Card.Header>
-            <Card.Title>Possible Conditions</Card.Title>
-            <Card.Description>Based on AI analysis of symptoms</Card.Description>
-          </Card.Header>
-          <Card.Content>
-            <div className="space-y-3">
+      {/* AI Analysis Display */}
+      <AIAnalysisDisplay 
+        analysis={assessment.aiAnalysis} 
+        loading={false}
+      />
               {assessment.aiAnalysis.possibleConditions.map((condition, index) => (
                 <div key={index} className="p-4 border border-cloud-gray rounded-lg">
                   <div className="flex items-center justify-between mb-2">

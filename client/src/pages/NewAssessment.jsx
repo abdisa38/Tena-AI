@@ -78,6 +78,7 @@ const NewAssessment = () => {
       return;
     }
 
+    setAnalyzing(true);
     try {
       const assessmentData = {
         symptoms,
@@ -91,10 +92,12 @@ const NewAssessment = () => {
 
       const result = await createAssessment(assessmentData);
       
-      toast.success('Assessment created successfully');
+      toast.success('Assessment created successfully! AI analysis complete.');
       navigate(`/dashboard/assessments/${result._id}`);
     } catch (error) {
       toast.error(error.message || 'Failed to create assessment');
+    } finally {
+      setAnalyzing(false);
     }
   };
 
@@ -217,11 +220,19 @@ const NewAssessment = () => {
           <Card.Content className="text-center py-12">
             <Loading size="lg" className="mx-auto mb-4" />
             <h3 className="text-xl font-semibold text-tena-black mb-2">
-              Analyzing Your Recording...
+              {recordingMethod === 'voice' ? 'Analyzing Your Recording...' : 'Creating Assessment with AI...'}
             </h3>
             <p className="text-gray-600">
-              AI is extracting symptoms from your voice recording
+              {recordingMethod === 'voice' 
+                ? 'AI is extracting symptoms from your voice recording' 
+                : 'AI is analyzing your symptoms and generating recommendations'}
             </p>
+            <div className="mt-4">
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-cloud-gray rounded-full">
+                <Activity className="w-4 h-4 text-tena-yellow animate-pulse" />
+                <span className="text-sm text-gray-600">This takes 10-15 seconds</span>
+              </div>
+            </div>
           </Card.Content>
         </Card>
       )}

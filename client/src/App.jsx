@@ -10,6 +10,8 @@ import AssessmentHistory from '@pages/AssessmentHistory';
 import AssessmentDetail from '@pages/AssessmentDetail';
 import Profile from '@pages/Profile';
 import Subscription from '@pages/Subscription';
+import SubscriptionSuccess from '@pages/SubscriptionSuccess';
+import SubscriptionCancel from '@pages/SubscriptionCancel';
 import NotFound from '@pages/NotFound';
 
 // Layouts
@@ -25,6 +27,10 @@ function App() {
           <Route path="/" element={<MainLayout />}>
             <Route index element={<LandingPage />} />
           </Route>
+
+          {/* Subscription Success/Cancel (outside dashboard) */}
+          <Route path="/subscription/success" element={<SubscriptionSuccess />} />
+          <Route path="/subscription/cancel" element={<SubscriptionCancel />} />
 
           {/* Protected Routes */}
           <Route
